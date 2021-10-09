@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'fbballapiv2',
     'rest_framework', 
     'corsheaders',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
