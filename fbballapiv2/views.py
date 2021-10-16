@@ -44,14 +44,18 @@ def compile(request):
     #print(avrF.to_dict("records"))
     
     
-    g = raterHelper(avrF[avrF.Pos.eq("G")],"G")
+    pg = raterHelper(avrF[avrF.Pos.eq("PG")],"PG")
+    sg = raterHelper(avrF[avrF.Pos.eq("SG")],"SG")
     #print(g.to_dict('records'))
-    f = raterHelper(avrF[avrF.Pos.eq("F")],"F")
+    sf = raterHelper(avrF[avrF.Pos.eq("SF")],"SF")
+    pf = raterHelper(avrF[avrF.Pos.eq("PF")],"PF")
     c = raterHelper(avrF[avrF.Pos.eq("C")],"C")
     a = raterHelper(avrF[avrF.Pos.eq("A")],"A")
 
-    g = g.sort_values(by=['TotalRating'],ascending=False)
-    f = f.sort_values(by=['TotalRating'],ascending=False)
+    pg = pg.sort_values(by=['TotalRating'],ascending=False)
+    sg = sg.sort_values(by=['TotalRating'],ascending=False)
+    sf = sf.sort_values(by=['TotalRating'],ascending=False)
+    pf = pf.sort_values(by=['TotalRating'],ascending=False)
     c = c.sort_values(by=['TotalRating'],ascending=False)
     a = a.sort_values(by=['TotalRating'],ascending=False)
 
@@ -61,8 +65,10 @@ def compile(request):
     rtavr = (rtavr/len(allarr)).round(2)
 
     ratings = {
-        "guards": g.to_dict('records'),
-        "forwards": f.to_dict('records'),
+        "pguards": pg.to_dict('records'),
+        "sguards": sg.to_dict('records'),
+        "sforwards": sf.to_dict('records'),
+        "pforwards": pf.to_dict('records'),
         "centers": c.to_dict('records'),
         "all": a.to_dict('records'),
         "artavr":{
@@ -150,9 +156,8 @@ def raterHelper(a,p):
     if p=="A":
         outF = pd.DataFrame(Player.objects.all().values())
     else:
-        outF = pd.DataFrame(Player.objects.filter(Pos__Position=p).values())
+        outF = pd.DataFrame(Player.objects.filter(Pos__contains=p).values())
     
-    outF['FTeam_id'] = outF['FTeam_id'].fillna(0)
     traverser = ["FGM","FGA","FG3M","FTM","FTA","REB","AST","STL","BLK","TOV","PTS"]
 
     for i in traverser:
