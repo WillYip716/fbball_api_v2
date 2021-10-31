@@ -27,7 +27,7 @@ SECRET_KEY = '@ak1_k^lef=8t3yl#fo2zo6ktl(ix^nzt+!5r**e9is+9m06#t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fantasybballcalculator.herokuapp.com/', '127.0.0.1', 'localhost','fbballcalculator.herokuapp.com/']
+ALLOWED_HOSTS = ['fbball-apiv2.herokuapp.com/', '127.0.0.1', 'localhost','fbballcalculator.herokuapp.com/']
 
 
 # Application definition
